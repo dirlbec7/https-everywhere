@@ -5,18 +5,37 @@
 
 "use strict";
 
+/* Adds or removes "dark" class for all relevant elements) */
+function setProporColor(darkStyle){
+  if (darkStyle){
+    document.body.classList.add("dark");
+    document.querySelectorAll(".section-header-span").forEach(shs => {
+      shs.classList.add("dark");
+    });
+    document.getElementById("update-channels-warning").classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+    document.querySelectorAll(".section-header-span").forEach(shs => {
+      shs.classList.remove("dark");
+    });
+    document.getElementById("update-channels-warning").classList.remove("dark");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const showCounter = document.getElementById("showCounter");
   const autoUpdateRulesets = document.getElementById("autoUpdateRulesets");
   const enableMixedRulesets = document.getElementById("enableMixedRulesets");
   const showDevtoolsTab = document.getElementById("showDevtoolsTab");
+  const darkStyle = document.getElementById("darkStyle");
 
   const defaultOptions = {
     showCounter: true,
     autoUpdateRulesets: true,
     enableMixedRulesets: false,
-    showDevtoolsTab: true
+    showDevtoolsTab: true,
+    darkStyle: false
   };
 
   sendMessage("get_option", defaultOptions, item => {
@@ -24,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
     autoUpdateRulesets.checked = item.autoUpdateRulesets;
     enableMixedRulesets.checked = item.enableMixedRulesets;
     showDevtoolsTab.checked = item.showDevtoolsTab;
+    darkStyle.checked = item.darkStyle;
+
+    setProporColor(darkStyle.checked);
 
     showCounter.addEventListener("change", () => {
       sendMessage("set_option", { showCounter: showCounter.checked });
@@ -39,6 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showDevtoolsTab.addEventListener("change", () => {
       sendMessage("set_option", { showDevtoolsTab: showDevtoolsTab.checked });
+    });
+
+    darkStyle.addEventListener("change", () => {
+      sendMessage("set_option", { darkStyle: darkStyle.checked });
+      setProporColor(darkStyle.checked);
     });
   });
 
@@ -237,11 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
   sendMessage("get_user_rules", null, userRules => {
     let user_rules_parent = e("user-rules-wrapper");
 
-    if ( 0 === userRules.length) {
-      hide(user_rules_parent);
-      return ;
-    }
-
     // img element "remove button"
     let templateRemove = document.createElement("img");
     templateRemove.src = chrome.runtime.getURL("images/remove.png");
@@ -272,10 +294,6 @@ document.addEventListener("DOMContentLoaded", () => {
   getOption_("disabledList", [], function(item) {
     let rule_host_parent = e("disabled-rules-wrapper");
 
-    if( 0 === item.disabledList.length ) {
-      hide(rule_host_parent);
-      return;
-    }
     // img element "remove button"
     let templateRemove = document.createElement("img");
     templateRemove.src = chrome.runtime.getURL("images/remove.png");
