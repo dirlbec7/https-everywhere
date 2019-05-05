@@ -1,0 +1,13 @@
+<ruleset name="UIUC Hosting">
+	<!--  -->
+	<target host="*.web.illinois.edu" />
+	<!--  -->
+	<target host="web.illinois.edu" />
+
+	<!--  -->
+	<securecookie host=".*" name=".*" />
+
+	<!--  -->
+	<rule from="^http:" to="https:" />
+
+</ruleset> 
