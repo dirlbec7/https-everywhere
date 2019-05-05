@@ -6,8 +6,8 @@
 "use strict";
 
 /* Adds or removes "dark" class for all relevant elements) */
-function setProperColor(darkStyle){
-  if (darkStyle){
+function setProperColor(darkStyle) {
+  if (darkStyle) {
     document.body.classList.add("dark");
     document.querySelectorAll(".section-header-span").forEach(shs => {
       shs.classList.add("dark");
