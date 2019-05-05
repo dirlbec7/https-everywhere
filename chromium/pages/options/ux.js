@@ -6,7 +6,7 @@
 "use strict";
 
 /* Adds or removes "dark" class for all relevant elements) */
-function setProporColor(darkStyle){
+function setProperColor(darkStyle){
   if (darkStyle){
     document.body.classList.add("dark");
     document.querySelectorAll(".section-header-span").forEach(shs => {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     darkStyle.addEventListener("change", () => {
       sendMessage("set_option", { darkStyle: darkStyle.checked });
-      setProporColor(darkStyle.checked);
+      setProperColor(darkStyle.checked);
     });
   });
 
