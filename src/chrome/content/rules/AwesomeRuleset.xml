@@ -1,0 +1,7 @@
+<ruleset name="AwesomeRuleteset!">
+	<!-- Defining target target.com -->
+	<target host="target.com" />
+
+
+
+</ruleset> 
