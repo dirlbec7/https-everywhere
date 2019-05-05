@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showDevtoolsTab.checked = item.showDevtoolsTab;
     darkStyle.checked = item.darkStyle;
 
-    setProporColor(darkStyle.checked);
+    setProperColor(darkStyle.checked);
 
     showCounter.addEventListener("change", () => {
       sendMessage("set_option", { showCounter: showCounter.checked });
