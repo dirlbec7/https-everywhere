@@ -1,0 +1,9 @@
+<ruleset name="Awesome New Ruleset">
+	<!-- This is a new domain -->
+	<target host="12349.com" />
+
+
+	<!--  -->
+	<rule from="^https://" to="https://" />
+
+</ruleset> 
